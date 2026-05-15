@@ -305,6 +305,19 @@ tbody tr:hover td {
   background: var(--accent-dim);
 }
 
+td.table-empty {
+  text-align: center;
+  padding: 32px 12px;
+  color: var(--text-muted);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+}
+
+td.table-empty:hover,
+tbody tr:hover td.table-empty {
+  background: transparent;
+}
+
 /* Amount cells in the table — smaller than summary cards */
 td.income-amount,
 td.expense-amount {

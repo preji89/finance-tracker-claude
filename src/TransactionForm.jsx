@@ -8,12 +8,13 @@ export default function TransactionForm({ categories, onAdd }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!description || !amount) return;
+    const parsed = Number(amount);
+    if (!description.trim() || !parsed || parsed <= 0) return;
 
     onAdd({
       id: Date.now(),
-      description,
-      amount: Number(amount),
+      description: description.trim(),
+      amount: parsed,
       type,
       category,
       date: new Date().toISOString().split('T')[0],
@@ -34,12 +35,16 @@ export default function TransactionForm({ categories, onAdd }) {
           placeholder="Description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+          required
         />
         <input
           type="number"
           placeholder="Amount"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
+          min="0.01"
+          step="0.01"
+          required
         />
         <select value={type} onChange={(e) => setType(e.target.value)}>
           <option value="income">Income</option>

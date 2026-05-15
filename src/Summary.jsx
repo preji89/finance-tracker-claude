@@ -1,3 +1,6 @@
+const fmt = (n) =>
+  n.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+
 export default function Summary({ transactions }) {
   const totalIncome = transactions
     .filter(t => t.type === "income")
@@ -13,15 +16,15 @@ export default function Summary({ transactions }) {
     <div className="summary">
       <div className="summary-card">
         <h3>Income</h3>
-        <p className="income-amount">${totalIncome}</p>
+        <p className="income-amount">{fmt(totalIncome)}</p>
       </div>
       <div className="summary-card">
         <h3>Expenses</h3>
-        <p className="expense-amount">${totalExpenses}</p>
+        <p className="expense-amount">{fmt(totalExpenses)}</p>
       </div>
       <div className="summary-card">
         <h3>Balance</h3>
-        <p className="balance-amount">${balance}</p>
+        <p className={balance < 0 ? "expense-amount" : "balance-amount"}>{fmt(balance)}</p>
       </div>
     </div>
   );

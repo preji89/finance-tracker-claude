@@ -40,19 +40,27 @@ export default function TransactionList({ transactions, categories, onDelete }) 
           </tr>
         </thead>
         <tbody>
-          {filtered.map(t => (
-            <tr key={t.id}>
-              <td>{t.date}</td>
-              <td>{t.description}</td>
-              <td>{t.category}</td>
-              <td className={t.type === "income" ? "income-amount" : "expense-amount"}>
-                {t.type === "income" ? "+" : "-"}${t.amount}
-              </td>
-              <td>
-                <button className="delete-btn" onClick={() => onDelete(t.id)}>Delete</button>
+          {filtered.length === 0 ? (
+            <tr>
+              <td colSpan={5} className="table-empty">
+                No transactions match the selected filters.
               </td>
             </tr>
-          ))}
+          ) : (
+            filtered.map(t => (
+              <tr key={t.id}>
+                <td>{t.date}</td>
+                <td>{t.description}</td>
+                <td>{t.category}</td>
+                <td className={t.type === "income" ? "income-amount" : "expense-amount"}>
+                  {t.type === "income" ? "+" : "-"}${t.amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                </td>
+                <td>
+                  <button className="delete-btn" onClick={() => onDelete(t.id)}>Delete</button>
+                </td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
     </div>
