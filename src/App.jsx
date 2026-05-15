@@ -30,18 +30,12 @@ function App() {
 
   return (
     <div className="app">
-      <header className="app-header">
-        <div className="header-eyebrow">Personal Finance</div>
-        <h1 className="header-title">Led<em>ger</em></h1>
-      </header>
+      <h1>Finance Tracker</h1>
+      <p className="subtitle">Track your income and expenses</p>
 
       <Summary transactions={transactions} />
-
-      <div className="mid-grid">
-        <SpendingChart transactions={transactions} />
-        <TransactionForm categories={categories} onAdd={handleAdd} />
-      </div>
-
+      <SpendingChart transactions={transactions} />
+      <TransactionForm categories={categories} onAdd={handleAdd} />
       <TransactionList transactions={transactions} categories={categories} onDelete={handleDelete} />
     </div>
   );
